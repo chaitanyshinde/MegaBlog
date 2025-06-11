@@ -32,6 +32,7 @@ export class AuthService {
       throw error;
     }
   }
+
   async login({ email, password }) {
     try {
       return await this.account.createEmailPasswordSession(email, password);
@@ -39,7 +40,25 @@ export class AuthService {
       throw error;
     }
   }
+
+  async getCurrentUser() {
+    try {
+      return await this.account.get();
+    } catch (error) {
+      console.log(error);
+    }
+    return null;
+  }
+
+  async logout() {
+    try {
+      return await this.account.deleteSessions();
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 
 const authService = new AuthService();
 export default authService;
+    
