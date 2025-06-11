@@ -1,4 +1,6 @@
 function App() {
+  console.log();
+  
   return (
     <>
       <h1>Mega Blog with Appwrite</h1>
