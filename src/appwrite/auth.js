@@ -1,6 +1,6 @@
 import conf from "../conf/conf";
 
-import { Client, Account } from "appwrite";
+import { Client, Account, ID } from "appwrite";
 
 export class AuthService {
   client = new Client();
@@ -45,7 +45,7 @@ export class AuthService {
     try {
       return await this.account.get();
     } catch (error) {
-      console.log(error);
+      console.log("current user post :: ", error);
     }
     return null;
   }
@@ -54,7 +54,7 @@ export class AuthService {
     try {
       return await this.account.deleteSessions();
     } catch (error) {
-      console.log(error);
+      console.log("logout post :: ", error);
     }
   }
 }
