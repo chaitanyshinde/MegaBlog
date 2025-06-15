@@ -1,8 +1,7 @@
 import React from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { Controller } from "react-hook-form";
-//controller docs
-//"control" converts this component into form to use as editor:
+
 export default function RTE({ name, control, label, defaultValue = "" }) {
   return (
     <div className="w-full">
@@ -11,8 +10,9 @@ export default function RTE({ name, control, label, defaultValue = "" }) {
       <Controller
         name={name || "content"}
         control={control}
-        render={({ field: { onChange } }) => ( //tracking onChange  
+        render={({ field: { onChange } }) => (
           <Editor
+            apiKey="2ft3ilbisqifxb6ds2i79y7224vzcjiwwqa4mlbfrw6ck4jr"
             initialValue={defaultValue}
             init={{
               initialValue: defaultValue,

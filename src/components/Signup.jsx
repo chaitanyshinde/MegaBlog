@@ -1,22 +1,22 @@
 import React, { useState } from "react";
-import { login } from "../store/authSlice";
 import authService from "../appwrite/auth";
-import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { Button, Logo, Input } from "./index";
+import { login } from "../store/authSlice";
+import { Button, Input, Logo } from "./index.js";
+import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 
 function Signup() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [error, setError] = useState("");
+  const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
-  const [error, setError] = useState(second);
 
   const create = async (data) => {
     setError("");
     try {
-      const session = authService.createAccount(data);
-      if (session) {
+      const userData = await authService.createAccount(data);
+      if (userData) {
         const userData = await authService.getCurrentUser();
         if (userData) dispatch(login(userData));
         navigate("/");
@@ -65,7 +65,7 @@ function Signup() {
               type="email"
               {...register("email", {
                 required: true,
-                validate: { 
+                validate: {
                   matchPattern: (value) =>
                     /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
                     "Email address must be a valid address",
